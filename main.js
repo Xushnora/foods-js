@@ -47,7 +47,7 @@ for (let i = 0; i < arrFood.length; i++) {
         <img class="pizza-img" src="${arrFood[i].imgUrl}" alt="pizza">
         <div class="in-box">
             <h3 class="name">${arrFood[i].name}</h3>
-            <p class="sum">${arrFood[i].price}</p>
+            <p class="sum">$  ${arrFood[i].price}</p>
             <button onclick="getAdd(${arrFood[i].id})" class="add-btn">Add to Card</button>
         </div>
     </li>
@@ -77,12 +77,12 @@ function getAdd(e) {
                     <img class="pizza-img" src="${newArr[j].imgUrl}" alt="pizza">
                     <div class="in-box">
                         <h3 class="name">${newArr[j].name}</h3>
-                        <p class="sum">${newArr[j].price}</p>
-                        <button id = "${newArr[j].id}" class="remove-btn">-</button>
+                        <p class="sum">$ ${newArr[j].price}</p>
+                        <button id = "${newArr[j].id}" class="remove-btn"><i class='bx bx-trash'></i></button>
                     </div>
                 </li>
             `  
-                elSubtitle.innerHTML =`Subtitle:${subtotal} $`;
+                elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
                 elTax.innerHTML =`Tax: ${tax}$`;
                 elTotal.innerHTML = `Total: ${total} $`;
                 elList2.appendChild(li);
@@ -94,7 +94,7 @@ function getAdd(e) {
         for (let i = 0; i < elRemove.length; i++) {
             elRemove[i].addEventListener('click', (e) => {
                 let ids = e.target;
-                ids.parentNode.parentNode.remove()
+                ids.parentNode.parentNode.parentNode.remove()
                 newArr = [];
             })
         }

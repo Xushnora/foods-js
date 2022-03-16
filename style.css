@@ -10,9 +10,10 @@
 }
 
 body {
+    width: 100%;
     height: 100vh;
     background-color: pink;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Sansita Swashed', cursive;
     background-image: url("https://media.istockphoto.com/photos/pepperoni-pizza-on-wooden-table-picture-id1301482898?b=1&k=20&m=1301482898&s=170667a&w=0&h=XLgT9kG_7_n02S-YzOY71EzcGgqBnY-GukEfhjOui64=");
     background-repeat: no-repeat;
     background-size: cover;
@@ -64,7 +65,7 @@ body {
 .list {
     padding-right: 15px;
     list-style-type: none;
-    height: 600px;
+    height: 500px;
     position: relative;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -72,10 +73,11 @@ body {
 
 .list-item {
     padding: 10px;
-    background-color: rgba(253, 173, 186, 0.842);
+    background-color: rgba(243, 167, 167, 0.575);
     display: flex;
     border-radius: 20px;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .list-item2 {
@@ -85,6 +87,7 @@ body {
     border-radius: 20px;
     margin-bottom: 15px;
     animation: list-anim 0.5s ease;
+    position: relative;
 }
 
 @keyframes list-anim {
@@ -118,10 +121,14 @@ body {
     color: #fff;
     cursor: pointer;
     transition: all 0.4s ease;
+    position: absolute;
+    bottom: -10px;
 }
 
 .add-btn:active {
-    background-color: rgb(5, 94, 167);
+    border: 1px solid rgb(23, 141, 196);
+    color: rgb(23, 141, 196);
+    background-color: rgba(255, 255, 255, 0.445);
 }
 
 .remove-btn {
@@ -132,6 +139,15 @@ body {
     color: #fff;
     cursor: pointer;
     transition: all 0.4s ease;
+    position: absolute;
+    right: -5px;
+    bottom: -10px;
+    border-radius: 50%;
+    font-size: 23px;
+}
+
+.remove-btn:hover {
+    background-color: rgb(247, 47, 47);
 }
 
 
@@ -172,3 +188,49 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #ccc; 
   }
+
+
+
+
+  @media screen and (max-width: 990px) {
+    .container {
+        width: 90%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 768px) { 
+    body {
+        width: 100%;
+        height: 100%;
+        background-color: pink;
+        background-image: url("https://media.istockphoto.com/photos/pepperoni-pizza-on-wooden-table-picture-id1301482898?b=1&k=20&m=1301482898&s=170667a&w=0&h=XLgT9kG_7_n02S-YzOY71EzcGgqBnY-GukEfhjOui64=");
+        background-repeat: no-repeat;
+        background-size: cover;
+        object-fit: cover;
+    }
+    .row {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 30px;
+    }
+    
+    .pitsa-box {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+
+    .sale-box {
+        width: 100%;
+    }
+
+}

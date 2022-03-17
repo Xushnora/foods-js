@@ -57,98 +57,119 @@ for (let i = 0; i < arrFood.length; i++) {
 
 let newArr = [];
 
-function getAdd(id) {
+function findFood (id) {
     for (let i = 0; i < arrFood.length; i++) {
         if (id == arrFood[i].id) {
-            newArr.push(arrFood[i]);
+            return arrFood[i]
         }
     }
-
-    let subtotal = 0;
-    let tax = 0;
-    let total = 0;
-
-    for (let j = 0; j < newArr.length; j++) {
-        subtotal += newArr[j].price;
-        tax = (subtotal * 0.1);
-        total = subtotal + tax;
-        if (j == newArr.length-1) {
-            let li = document.createElement("li");
-            li.className = "list-item2";
-            li.innerHTML = `
-                <img class="pizza-img" src="${newArr[j].imgUrl}" alt="pizza">
-                <div class="in-box">
-                    <h3 class="name">${newArr[j].name}</h3>
-                    <p class="sum">$ ${newArr[j].price}</p>
-                    <button onclick = "elRemove(${j})" class="remove-btn"><i class='bx bx-trash'></i></button>
-                </div>
-        `  
-            elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
-            elTax.innerHTML =`Tax: ${tax}$`;
-            elTotal.innerHTML = `Total: ${total} $`;
-            elList2.appendChild(li);
-        }
-    }
-    
 }
 
+function checkArray (item) {
+    
 
-function  elRemove(index) {
-    let newRemoveArr = [];
+    if (!newArr.length) {
+        const newFood = item
+        newFood.count = 1
+       return newArr.push(newFood)
+    }
 
     for (let i = 0; i < newArr.length; i++) {
-        if (index != i) {
-            newRemoveArr.push(newArr[i]);
+        if (item.id === newArr[i].id) {
+            return newArr[i].count = newArr[i].count + 1
         }
     }
 
-    newArr = newRemoveArr;
-    
-    elList2.innerHTML = "";
-    subtotal = 0;
-    tax = 0;
-    total = 0;
+    const newFood = item
+        newFood.count = 1
+
+    newArr.push(newFood)
+}
+
+function deleteFood (id) {
+    const arr = [];
+
+    for (let i = 0; i < newArr.length; i++) {
+        if (id === newArr[i].id) {
+            if (newArr[i].count > 1) {
+                const newFood = newArr[i]
+
+                newFood.count = newFood .count - 1;
+
+                arr.push(newFood)
+            }
+        } else {
+            arr.push(newArr[i]);
+        }
+    }
+
+    newArr = arr
+    renderCardFood()
+}
+
+function renderCardFood () {
+    elList2.innerHTML = '';
+
+    let subtitle = 0
 
     for (let i = 0; i < newArr.length; i++) {
         let li = document.createElement("li");
-        li.className = "list-item2";
-        li.innerHTML = `
-            <img class="pizza-img" src="${newArr[i].imgUrl}" alt="pizza">
-            <div class="in-box">
-                <h3 class="name">${newArr[i].name}</h3>
-                <p class="sum">$ ${newArr[i].price}</p>
-                <button onclick = "elRemove(${i})" class="remove-btn"><i class='bx bx-trash'></i></button>
-            </div>
-    `  
-        subtotal += newArr[i].price;
-        tax = (subtotal * 0.1);
-        total = subtotal + tax;
-        elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
-        elTax.innerHTML =`Tax: ${tax}$`;
-        elTotal.innerHTML = `Total: ${total} $`;
+            li.className = "list-item2";
+            li.innerHTML = `
+                <img class="pizza-img" src="${newArr[i].imgUrl}" alt="pizza">
+                <div class="in-box">
+                    <button class="count-btn">${newArr[i].count}</button>
+                    <h3 class="name">${newArr[i].name}</h3>
+                    <p class="sum">$ ${newArr[i].price * newArr[i].count}</p>
+                    <button class="push-btn" onclick="addButton(${i})">+</button>
+                    <button onclick = "removeButton(${i})" class="remove-btn">-</button>
+                </div>
+        `
+
+        subtitle += newArr[i].count * newArr[i].price
         elList2.appendChild(li);
-    }  
+    }
+
+    let taxiPrice = subtitle * 0.1
     
-    if (newArr.length == 0) {
-        subtotal = 0;
-        tax = 0;
-        total = 0;
-        elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
-        elTax.innerHTML =`Tax: ${tax}$`;
-        elTotal.innerHTML = `Total: ${total} $`;
-    } 
+    elTax.innerHTML =`Tax: ${taxiPrice}$`;
+    elTotal.innerHTML = `Total: ${subtitle + taxiPrice} $`
+    elSubtitle.innerHTML =`Subtitle: ${subtitle} $`;
+
+}
+
+function addButton (foodIndex) {
+    newArr[foodIndex].count = newArr[foodIndex].count + 1
+
+    renderCardFood()
+}
+
+function removeButton (foodIndex) {
+    let foundFood = newArr[foodIndex]
+    if (foundFood.count > 1) {
+        foundFood.count = foundFood.count - 1
+        return  renderCardFood()
+    }
+
+    let arr = []
+
+    for (let i = 0; i < newArr.length; i++) {
+        if (newArr[i].id !== foundFood.id ) {
+            arr.push(newArr[i]) 
+        }
+    }
+
+    newArr = arr
+
+    renderCardFood()
 }
 
 
+function getAdd(id) {
+    let foundFood = findFood(id)
 
+    checkArray(foundFood)
 
-
-
-
-
-
-
-
-
-
+    renderCardFood();    
+}
 

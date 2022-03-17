@@ -132,23 +132,57 @@ body {
     background-color: rgba(255, 255, 255, 0.445);
 }
 
+
+.remove-btn:hover {
+    background-color: rgb(247, 47, 47); 
+}
+
+.count-btn {
+    padding: 2px 16px;
+    background-color: transparent;
+    border-radius: 12px;
+    border: 2px solid blue;
+    color: blue;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 20px;
+    position: absolute;
+    right: 26px;
+    bottom: 34px;
+}
+
 .remove-btn {
-    padding: 10px 16px;
+    padding: 1.7px 20px;
     background-color: rgb(23, 141, 196);
     border-radius: 12px;
     border: 1px solid transparent;
     color: #fff;
     cursor: pointer;
+    border-radius: 8px;
+    font-size: 25px;
     transition: all 0.4s ease;
     position: absolute;
     right: -5px;
-    bottom: -10px;
-    border-radius: 50%;
-    font-size: 23px;
+    bottom: 0;
 }
 
-.remove-btn:hover {
-    background-color: rgb(247, 47, 47);
+.push-btn {
+    padding:  2.1px 20px;
+    background-color: rgb(23, 141, 196);
+    border-radius: 12px;
+    border: 1px solid transparent;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 23px;
+    transition: all 0.4s ease;
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+}
+
+.push-btn:hover {
+    background-color: green; 
 }
 
 

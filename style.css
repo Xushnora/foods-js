@@ -27,7 +27,6 @@ body {
 }
 
 .row {
-    height: 100vh;
     padding-top: 60px;
     display: flex;
     align-items: center;

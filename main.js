@@ -57,16 +57,16 @@ for (let i = 0; i < arrFood.length; i++) {
 
 let newArr = [];
 
-function getAdd(e) {
+function getAdd(id) {
     for (let i = 0; i < arrFood.length; i++) {
 
-        if (e == arrFood[i].id) {
+        if (id == arrFood[i].id) {
             newArr.push(arrFood[i]);
             elList2.innerHTML = "";
             let subtotal = 0;
             let tax = 0;
             let total = 0;
-
+            
             for (let j = 0; j < newArr.length; j++) {
                 subtotal += newArr[j].price;
                 tax = (subtotal * 0.1);

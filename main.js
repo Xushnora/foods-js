@@ -59,47 +59,86 @@ let newArr = [];
 
 function getAdd(id) {
     for (let i = 0; i < arrFood.length; i++) {
-
         if (id == arrFood[i].id) {
             newArr.push(arrFood[i]);
-            elList2.innerHTML = "";
-            let subtotal = 0;
-            let tax = 0;
-            let total = 0;
-            
-            for (let j = 0; j < newArr.length; j++) {
-                subtotal += newArr[j].price;
-                tax = (subtotal * 0.1);
-                total = subtotal + tax;
-                let li = document.createElement("li");
-                li.innerHTML = `
-                <li class="list-item2">
-                    <img class="pizza-img" src="${newArr[j].imgUrl}" alt="pizza">
-                    <div class="in-box">
-                        <h3 class="name">${newArr[j].name}</h3>
-                        <p class="sum">$ ${newArr[j].price}</p>
-                        <button id = "${newArr[j].id}" class="remove-btn"><i class='bx bx-trash'></i></button>
-                    </div>
-                </li>
-            `  
-                elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
-                elTax.innerHTML =`Tax: ${tax}$`;
-                elTotal.innerHTML = `Total: ${total} $`;
-                elList2.appendChild(li);
-            }
         }
     }
 
-    let elRemove = document.querySelectorAll('.remove-btn');
-        for (let i = 0; i < elRemove.length; i++) {
-            elRemove[i].addEventListener('click', (e) => {
-                let ids = e.target;
-                ids.parentNode.parentNode.parentNode.remove()
-                newArr = [];
-            })
-        }
+    let subtotal = 0;
+    let tax = 0;
+    let total = 0;
 
+    for (let j = 0; j < newArr.length; j++) {
+        subtotal += newArr[j].price;
+        tax = (subtotal * 0.1);
+        total = subtotal + tax;
+        if (j == newArr.length-1) {
+            let li = document.createElement("li");
+            li.className = "list-item2";
+            li.innerHTML = `
+                <img class="pizza-img" src="${newArr[j].imgUrl}" alt="pizza">
+                <div class="in-box">
+                    <h3 class="name">${newArr[j].name}</h3>
+                    <p class="sum">$ ${newArr[j].price}</p>
+                    <button onclick = "elRemove(${j})" class="remove-btn"><i class='bx bx-trash'></i></button>
+                </div>
+        `  
+            elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
+            elTax.innerHTML =`Tax: ${tax}$`;
+            elTotal.innerHTML = `Total: ${total} $`;
+            elList2.appendChild(li);
+        }
+    }
+    
 }
+
+
+function  elRemove(index) {
+    let newRemoveArr = [];
+
+    for (let i = 0; i < newArr.length; i++) {
+        if (index != i) {
+            newRemoveArr.push(newArr[i]);
+        }
+    }
+
+    newArr = newRemoveArr;
+    
+    elList2.innerHTML = "";
+    subtotal = 0;
+    tax = 0;
+    total = 0;
+
+    for (let i = 0; i < newArr.length; i++) {
+        let li = document.createElement("li");
+        li.className = "list-item2";
+        li.innerHTML = `
+            <img class="pizza-img" src="${newArr[i].imgUrl}" alt="pizza">
+            <div class="in-box">
+                <h3 class="name">${newArr[i].name}</h3>
+                <p class="sum">$ ${newArr[i].price}</p>
+                <button onclick = "elRemove(${i})" class="remove-btn"><i class='bx bx-trash'></i></button>
+            </div>
+    `  
+        subtotal += newArr[i].price;
+        tax = (subtotal * 0.1);
+        total = subtotal + tax;
+        elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
+        elTax.innerHTML =`Tax: ${tax}$`;
+        elTotal.innerHTML = `Total: ${total} $`;
+        elList2.appendChild(li);
+    }  
+    
+    if (newArr.length == 0) {
+        subtotal = 0;
+        tax = 0;
+        total = 0;
+        elSubtitle.innerHTML =`Subtitle: ${subtotal} $`;
+        elTax.innerHTML =`Tax: ${tax}$`;
+        elTotal.innerHTML = `Total: ${total} $`;
+    } 
+}
+
 
 
 
